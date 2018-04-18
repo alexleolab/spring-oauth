@@ -1,5 +1,6 @@
 
 
+
 # spring-boot-security-oauth2
 
 该项目是一个基于spring boot 1.4.5
@@ -10,5 +11,6 @@
 2.rsc-server api接口服务器,访问接口时带上token作为参数
 
 版本不能升级到1.5.X，存在版本兼容问题
+
 
 

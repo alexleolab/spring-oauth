@@ -8,8 +8,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+
 	<name>rsc-server</name>
 	<description>api资源服务器</description>
+
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
