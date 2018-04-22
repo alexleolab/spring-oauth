@@ -31,14 +31,18 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
 	@Value("${resource.id:spring-boot-application}") // 默认值spring-boot-application
 	private String resourceId;
 
 	@Value("${access_token.validity_period:3600}") // 默认值3600
-	int accessTokenValiditySeconds = 3600;
+	private final static Integer TOKEN_VLD_TIME = 3600;
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	
+	
+	private static final String AUTH_KEY="123";
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -61,14 +65,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 			.authorities("ROLE_CLIENT")
 			.scopes("read", "write")
 			.resourceIds(resourceId)
-			.accessTokenValiditySeconds(accessTokenValiditySeconds)
+			.accessTokenValiditySeconds(TOKEN_VLD_TIME)
 		.and()
 			.withClient("trusted-app")
 			.authorizedGrantTypes("client_credentials", "password")
 			.authorities("ROLE_TRUSTED_CLIENT")
 			.scopes("read", "write")
 			.resourceIds(resourceId)
-			.accessTokenValiditySeconds(accessTokenValiditySeconds)
+			.accessTokenValiditySeconds(TOKEN_VLD_TIME)
 			.secret("secret");
 	}
 
@@ -97,7 +101,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 			}
 
 		};
-		accessTokenConverter.setSigningKey("123");// 测试用,资源服务使用相同的字符达到一个对称加密的效果,生产时候使用RSA非对称加密方式
+		accessTokenConverter.setSigningKey(AUTH_KEY);// 测试用,资源服务使用相同的字符达到一个对称加密的效果,生产时候使用RSA非对称加密方式
 		return accessTokenConverter;
 	}
 
