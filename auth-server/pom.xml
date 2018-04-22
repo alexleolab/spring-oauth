@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>demo-security-oauth2-authorizationServer</name>
-	<description>Demo project for Spring Boot security</description>
+	<name>authserver</name>
+	<description>authserver token鉴权服务器</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
